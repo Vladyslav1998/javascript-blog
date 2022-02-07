@@ -7,10 +7,11 @@ document.getElementById('test-button').addEventListener('click', function(){
 */
 
 const titleClickHandler = function (event) {
+   const clickedElement = this;
    console.log('Link was clicked!');
    console.log('titleClickHandler:', event);
 
-   /* remove class 'active' from all article links  */
+   /* [DONE] remove class 'active' from all article links  */
 
    const activeLinks = document.querySelectorAll('.titles a.active');
 
@@ -18,12 +19,15 @@ const titleClickHandler = function (event) {
       activeLink.classList.remove('active');
    }
 
-   /* add class 'active' to the clicked link */
+   /* [IN PROGRESS] add class 'active' to the clicked link */
 
+   console.log('clickedElement:', clickedElement);
 
-   /* remove class 'active' from all articles */
+   clickedElement.classList.add('active');
 
-   const activeArticles = document.querySelectorAll('.titles a.active');
+   /* [DONE] remove class 'active' from all articles */
+
+   const activeArticles = document.querySelectorAll('.posts .active');
 
    for (let activeArticle of activeArticles) {
       activeArticle.classList.remove('active');
