@@ -73,7 +73,6 @@ function generateTitleLinks() {
    }
 
    titleList.innerHTML = html;
-   
 }
 
 generateTitleLinks();
