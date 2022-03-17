@@ -89,7 +89,7 @@ function generateTags(customSelector = '') {
 
       /* find tags wrapper */
       const tagsWrapper = article.querySelector(optArticleTagsSelector);
-      
+
       /* make html variable with empty string */
       let html = '';
 
@@ -176,3 +176,7 @@ function addClickListenersToTags() {
 }
 
 addClickListenersToTags();
+
+function generateAuthors() {
+   
+}
