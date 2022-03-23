@@ -44,7 +44,9 @@ const titleClickHandler = function (event) {
 const optArticleSelector = '.post',
    optTitleSelector = '.post-title',
    optTitleListSelector = '.titles',
+   optArticleAuthorSelector = '.post-author',
    optArticleTagsSelector = '.post-tags .list';
+
 
 function generateTitleLinks() {
 
@@ -120,9 +122,9 @@ function generateTags(customSelector = '') {
 
 generateTags();
 
-function tagClickHandler(event) {
+function tagClickHandler(event) { // co robi event
    /* prevent default action for this event */
-   event.preventDefault('');
+   event.preventDefault(''); // co to daje
 
    /* make new constant named "clickedElement" and give it the value of "this" */
    const clickedElement = this;
@@ -131,10 +133,10 @@ function tagClickHandler(event) {
    const href = clickedElement.getAttribute('href');
 
    /* make a new constant "tag" and extract tag from the "href" constant */
-   const tag = href.replace('#tag-', '');
+   const tag = href.replace('#tag-', ''); // wytłumaczyć
 
    /* find all tag links with class active */
-   const allTagLinks = document.querySelectorAll('a.active[href^="#tag-"]');
+   const allTagLinks = document.querySelectorAll('a.active[href^="#tag-"]'); // wytłumaczyć
 
    /* START LOOP: for each active tag link */
    for (let tag of tags) {
@@ -164,19 +166,71 @@ function tagClickHandler(event) {
 
 function addClickListenersToTags() {
    /* find all links to tags */
-   const allLinksTags = document.querySelectorAll('a [href^="#tag-"]')
+   const allLinksTags = document.querySelectorAll('a [href^="#tag-"]');
    /* START LOOP: for each link */
-   for(let allLinkTag of allLinksTags) {
+   for (let allLinkTag of allLinksTags) {
 
       /* add tagClickHandler as event listener for that link */
-      allLinksTags.addClickedElement('click', tagClickHandler);
+      allLinkTag.addClickedElement('click', tagClickHandler);
 
       /* END LOOP: for each link */
    }
 }
-
 addClickListenersToTags();
 
+
 function generateAuthors() {
-   
+
+   const authorArticle = document.querySelectorAll('optArticleAuthorSelector');
+
+   for (let authorArticle of authorsArticles) {
+
+      const authorWrapper = authorArticle.querySelector('optArticleAuthorSelector');
+
+      let html = '';
+
+      const articleAuthors = article.getAttribute('.data-author');
+
+      authorWrapper.innerHTML = html;
+   }
+
+}
+generateAuthors();
+
+function addClickListenersToAuthors() {
+
+   const allLinksAuthors = document.querySelectorAll('a [href^="#author-"]');
+
+   for (let allLinkAuthor of allLinksAuthors){
+
+      allLinkAuthor.addEventListener('click', authorClickHandler);
+   }
+}
+addClickListenersToAuthors();
+
+
+function authorClickHandler(event) {
+
+   event.preventDefault('');
+
+   const clickedElement = this;
+
+   const href = clickedElement.getAttribute('href');
+
+   const author = href.replace('#author-', '');
+
+   const allAuthorLinks = document.querySelectorAll('a.active[href^="#author-"]');
+
+   for (let author of authors) {
+
+      allAuthorLinks.classList.remote('active');
+   }
+
+   const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+
+   for (let authorLink of authorsLinks) {
+
+      authorLinks.classList.add('active');
+   }
+   generateTitleLinks('[data-author="' + author + '"]');
 }
