@@ -45,7 +45,8 @@ const optArticleSelector = '.post',
    optTitleSelector = '.post-title',
    optTitleListSelector = '.titles',
    optArticleAuthorSelector = '.post-author',
-   optArticleTagsSelector = '.post-tags .list';
+   optArticleTagsSelector = '.post-tags .list',
+   optTagsListSelector = '.tags.list';
 
 
 function generateTitleLinks() {
@@ -83,6 +84,10 @@ function generateTitleLinks() {
 generateTitleLinks();
 
 function generateTags(customSelector = '') {
+
+   /* [NEW] create a new variable allTags with an empty object */
+   let allTags = {};
+
    /* find all articles */
    const articles = document.querySelectorAll(optArticleSelector + customSelector);
 
@@ -109,20 +114,34 @@ function generateTags(customSelector = '') {
 
          /* add generated code to html variable */
          html = html + linkHTMLtag;
+
+         /* [NEW] check if this link is NOT already in allTags */
+
+         if (!allTags[tag]) {
+            /* [NEW] add tag to allTags object */
+            allTags[tag] = 1;
+         } else {
+            allTags[tag]++;
+         }
+        /* END LOOP: for each tag */
       }
-      /* END LOOP: for each tag */
-
-
       /* insert HTML of all the links into the tags wrapper */
       tagsWrapper.innerHTML = html;
 
       /* END LOOP: for every article: */
    }
+   /* [NEW] find list of tags in right column */
+   const tagList = document.querySelector(optTagsListSelector);
+
+   /* [NEW] add html from allTags to tagList */
+   //tagList.innerHTML = allTags.join(' '); // Nie rozumiem tej części kodu. Mógłbyś wyjaśnić to w komentarzu  pod tą linijką kodu ?
+   console.log(allTags);
 }
 
 generateTags();
 
 function tagClickHandler(event) { // co robi event
+
    /* prevent default action for this event */
    event.preventDefault(''); // co to daje
 
@@ -197,6 +216,7 @@ function generateAuthors() {
 }
 generateAuthors();
 
+
 function addClickListenersToAuthors() {
 
    const allLinksAuthors = document.querySelectorAll('a [href^="#author-"]');
@@ -234,3 +254,8 @@ function authorClickHandler(event) {
    }
    generateTitleLinks('[data-author="' + author + '"]');
 }
+
+
+
+
+
