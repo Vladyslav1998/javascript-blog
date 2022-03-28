@@ -107,10 +107,18 @@ function calculateTagsParams(tags) {
 
 function calculateTagClass(count, params) {
    const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParam) + '</li>';
+
    console.log('tagLinkHTML:', tagLinkHTML);
 
-   
+   const normalizedCount = count - params.min;
 
+   const normalizedMax = params.max - params.min;
+
+   const percentage = normalizedCount / normalizedMax;
+
+   classNumber = Math.floor(percentage * (optCloudClassCount - 1) + 1);
+
+   return optCloudClassPrefixHTML + classNumber;
 }
 
 function generateTags(customSelector = '') {
@@ -210,7 +218,7 @@ function tagClickHandler(event) { // co robi event
    }
 
    /* find all tag links with "href" attribute equal to the "href" constant */
-   const tagLinks = document.querySelectorAll('a[href="' + href + '"]');
+   const tagLinks = document.querySelectorAll('a [href="' + href + '"]');
 
    /* START LOOP: for each found tag link */
    for (let tagLink of tagLinks) {
