@@ -46,6 +46,7 @@ const optArticleSelector = '.post',
    optTitleListSelector = '.titles',
    optArticleAuthorSelector = '.post-author',
    optArticleTagsSelector = '.post-tags .list',
+   optArticleAuthorWrapper = '.list.authors',
    optCloudClassCount = '5',
    optCloudClassPrefix = 'tag-size-',
    optTagsListSelector = '.tags.list';
@@ -87,7 +88,7 @@ generateTitleLinks();
 
 function calculateTagsParams(tags) {
 
-   const parms = {max: 0, min: 999999};
+   const params = {max: 0, min: 999999};
 
    for (let tag in tags) {
       console.log(tag + ' is used ' + tags[tag] + ' times');
@@ -181,6 +182,7 @@ function generateTags(customSelector = '') {
    /* [NEW] START LOOP: for each tag in allTags: */
    for (let tag in allTags) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
+      let tagLinkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li> ';
       allTagsHTML += tagLinkHTML;
    }
    /* [NEW] END LOOP: for each tag in allTags: */
@@ -249,23 +251,28 @@ function addClickListenersToTags() {
 addClickListenersToTags();
 
 
-function generateAuthors() {
+// function generateAuthors() {
 
-   const authorArticle = document.querySelectorAll('optArticleAuthorSelector');
+//    const articles = document.querySelectorAll(optArticleSelector);
 
-   for (let authorArticle of authorsArticles) {
+//    let authorListHTML = '';
 
-      const authorWrapper = authorArticle.querySelector('optArticleAuthorSelector');
+//    const authorWrapper = document.querySelector(optArticleAuthorWrapper);
 
-      let html = '';
+//    for (let article of articles) {
 
-      const articleAuthors = article.getAttribute('.data-author');
+//       const authorElement = article.getAttribute('data-author');
 
-      authorWrapper.innerHTML = html;
-   }
+//       const link = '<li><a href="#author-'+authorElement+'">'+authorElement+'</a></li>';
 
-}
-generateAuthors();
+//       authorListHTML += link;
+
+//    }
+
+//    authorWrapper.innerHTML = authorListHTML;
+
+// }
+// generateAuthors();
 
 
 function addClickListenersToAuthors() {
