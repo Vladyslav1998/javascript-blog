@@ -251,28 +251,28 @@ function addClickListenersToTags() {
 addClickListenersToTags();
 
 
-// function generateAuthors() {
+function generateAuthors() {
 
-//    const articles = document.querySelectorAll(optArticleSelector);
+   const articles = document.querySelectorAll(optArticleSelector);
 
-//    let authorListHTML = '';
+   let authorListHTML = ''; //
 
-//    const authorWrapper = document.querySelector(optArticleAuthorWrapper);
+   const authorWrapper = document.querySelector(optArticleAuthorWrapper);
 
-//    for (let article of articles) {
+   for (let article of articles) {
 
-//       const authorElement = article.getAttribute('data-author');
+      const authorElement = article.getAttribute('data-author');
 
-//       const link = '<li><a href="#author-'+authorElement+'">'+authorElement+'</a></li>';
+      const link = '<li><a href="#author-'+authorElement+'">'+authorElement+'</a></li>';
 
-//       authorListHTML += link;
+      authorListHTML += link;
 
-//    }
+   }
 
-//    authorWrapper.innerHTML = authorListHTML;
+   authorWrapper.innerHTML = authorListHTML;
 
-// }
-// generateAuthors();
+}
+generateAuthors();
 
 
 function addClickListenersToAuthors() {
