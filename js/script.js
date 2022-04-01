@@ -1,4 +1,11 @@
 'use strict';
+const templates = {
+   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+}
+
+const tagCloudLink = {
+   articleLink: Handlebars.compile(document.querySelector('#templates.tagCloudLink').innerHTML)
+}
 
 const { list } = require("postcss");
 
@@ -70,7 +77,10 @@ function generateTitleLinks() {
 
       const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      // const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+
+      const linkHTMLData = { id: articleId, title: articleTitle };
+      const linkHTML = templates.articleLink(linkHTMLData);
 
       html = html + linkHTML;
 
@@ -179,19 +189,27 @@ function generateTags(customSelector = '') {
 
    console.log('tagsParams:', tagsParams);
 
-   let allTagsHTML = '';
+   const allTagsData = { tags: [] };
 
    /* [NEW] START LOOP: for each tag in allTags: */
    for (let tag in allTags) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
       let tagLinkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li> ';
-      allTagsHTML += tagLinkHTML;
+      // allTagsHTML += tagLinkHTML;
+      allTagsData.tags.push({
+         tag: tag,
+         count: allTags[tag],
+         className: calculateTagClass(allTags[tag], tagsParams)
+      });
    }
    /* [NEW] END LOOP: for each tag in allTags: */
 
    /*[NEW] add HTML from allTagsHTML to tagList */
-   tagList.innerHTML = allTagsHTML;
+   // tagList.innerHTML = allTagsHTML;
+   tagList.innerHTML = templates.tagCloudLink(allTagsData);
+
 }
+console.log(allTagsData);
 
 generateTags();
 
@@ -265,9 +283,9 @@ function generateAuthors() { //tworzę funkcję
 
       const authorElement = article.getAttribute('data-author'); // znajduję atrybuty
 
-      const link = '<li><a href="#author-'+authorElement+'">'+authorElement+'</a></li>'; // tworzę link
+      const link = '<li><a href="#author-' + authorElement + '">' + authorElement + '</a></li>'; // tworzę link
 
-      authorListHTML += link; // tu wsadzam link 
+      authorListHTML += link; // tu wsadzam link
 
    }
 
@@ -275,6 +293,8 @@ function generateAuthors() { //tworzę funkcję
 
 }
 generateAuthors();
+
+// JEŻELI, COŚ ŹLE NAPISAŁEM TO PROSZĘ CIĘ NAPISAĆ, JAK MA BYĆ POPRAWNIE :)
 
 
 function addClickListenersToAuthors() {

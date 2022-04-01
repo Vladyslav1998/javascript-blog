@@ -1,3 +1,6 @@
+"globals" : {
+   "Handlebars": false
+}
 {
    "env": {
       "browser": true,
@@ -31,3 +34,4 @@
       ]
    }
 }
+
