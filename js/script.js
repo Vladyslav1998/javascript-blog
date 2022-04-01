@@ -1,5 +1,7 @@
 'use strict';
 
+const { list } = require("postcss");
+
 const titleClickHandler = function (event) {
    event.preventDefault();
    const clickedElement = this;
@@ -251,21 +253,21 @@ function addClickListenersToTags() {
 addClickListenersToTags();
 
 
-function generateAuthors() {
+function generateAuthors() { //tworzę funkcję
 
-   const articles = document.querySelectorAll(optArticleSelector);
+   const articles = document.querySelectorAll(optArticleSelector); // wybieram wszystkie artykuły
 
-   let authorListHTML = ''; //
+   let authorListHTML = ''; // chyba tworzę miejsce, gdzie wsadzę elementy w HTMLu
 
-   const authorWrapper = document.querySelector(optArticleAuthorWrapper);
+   const authorWrapper = document.querySelector(optArticleAuthorWrapper); // wybieram wszystkie list.author
 
-   for (let article of articles) {
+   for (let article of articles) { // tworzę pętlę, która dziła we wsztstkich artykułach
 
-      const authorElement = article.getAttribute('data-author');
+      const authorElement = article.getAttribute('data-author'); // znajduję atrybuty
 
-      const link = '<li><a href="#author-'+authorElement+'">'+authorElement+'</a></li>';
+      const link = '<li><a href="#author-'+authorElement+'">'+authorElement+'</a></li>'; // tworzę link
 
-      authorListHTML += link;
+      authorListHTML += link; // tu wsadzam link 
 
    }
 
